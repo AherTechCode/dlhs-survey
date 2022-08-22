@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,7 +17,7 @@
         <nav class="navbar is-light">
             <div class="navbar-brand">
                 <a class="navbar-item" href="#">
-                    <h1 style="font-size: xx-large;">UPLOAD</h1>
+                    <h3 class="title is-3">UPLOAD STUDENTS</h3>
                 </a>
                 <div class="navbar-burger" data-target="navbarExampleTransparentExample">
                     <span></span>
@@ -49,7 +50,22 @@
                 <div class="columns is-centered">
                     <div class="column"></div>
                     <div class="column">
-                        <div class="file is-centered is-large">
+                    	<div class="field">
+			    <select class="input" name="class_id" id="class_id" >
+                                    <option disabled selected style="text-align:center">------Select Class------</option>
+                                    <?php 
+                                        require('../server/db_connect.php');
+                                        $camp_list = "select * from classes";
+                                        $camp_query = $conn->query($camp_list);
+                                        while($row = $camp_query->fetch_assoc()) {
+                                    ?>
+                                    <option value="<?php echo $row['id'] ?>"><?php echo $row['student_class'] ?></option>
+                                    <?php
+                                    }                       
+                                    ?>
+                                </select>
+                        </div>
+                        <div class="file  is-centered">
                             <label class="file-label">
                                 <input class="file-input" type="file" name="file">
                                 <span class="file-cta">
@@ -59,9 +75,7 @@
                                     <span class="file-label">
                                         Choose an excel file…
                                     </span>
-                                    <span class="file-name">
-
-                                    </span>
+                                
                                 </span>
                             </label>
                         </div><br/><br/> 
@@ -94,16 +108,19 @@
                     $firstname = $getData[0];
                     $lastname = $getData[1];
                     $admissionNumber = $getData[2];
-                    $classes_id = $getData[3];
+                    $classes_id = $_POST["class_id"];
                     $targets_id = 1;
                     $targets_id = (int) $targets_id;
                     $password = '12345'; 
-                    $sql = "INSERT into users (first_name,last_name,admission_num,classes_id,targets_id,pass) VALUES (?,?,?,?,?,?)";
+                    $campus_id = $_SESSION["campus"];
+                    $sql = "INSERT into users (first_name,last_name,admission_num,classes_id,targets_id,pass,campus_id) VALUES (?,?,?,?,?,?,?)";
                     $stmt= $conn->prepare($sql);
-                    $stmt->bind_param("sssdds", $firstname, $lastname, $admissionNumber,$classes_id,$targets_id,$password);
+                    $stmt->bind_param("sssddsd", $firstname, $lastname, $admissionNumber,$classes_id,$targets_id,$password,$campus_id);
                     $stmt->execute();
 
-                    if(!isset($stmt))
+                }
+                
+                if(!isset($stmt))
                     {
                         echo "<script type=\"text/javascript\">
                         alert(\"Invalid File:Please Upload CSV File.\");
@@ -114,7 +131,6 @@
                          alert(\"File has been successfully Imported.\");
                         </script>";
                     }
-                }
           
             fclose($file);  
          }

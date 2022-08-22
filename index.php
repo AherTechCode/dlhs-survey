@@ -60,7 +60,7 @@
                     <div class="container">
                         <form method="post">
                             <div class="field">
-                                <label for="username" class="label">Username</label>
+                                <label for="username" class="label">Admission Number</label>
                                 <div class="control has-icons-left">
                                     <input class="input" id="username" name="username" type="text">
                                     <span class="icon is-small is-left">

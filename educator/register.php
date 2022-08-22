@@ -36,9 +36,29 @@
                         <input class="input" id="password" name="password" type="password">
                     </div>
                 </div>
+                <div class="field">
+                    <label for="campus" class="label">Campus:</label>
+                    <div class="control">
+                        <select class="input" name="campus_id" id="campus_id" >
+                            <option disabled selected style="text-align:center">------Select Campus------</option>
+                            <?php 
+                                require('../server/db_connect.php');
+                                $camp_list = "select * from campuses";
+                                $camp_query = $conn->query($camp_list);
+                                while($row = $camp_query->fetch_assoc()) {
+                                    ?>
+                                    <option value="<?php echo $row['id'] ?>"><?php echo $row['campus'] ?></option>
+                                    <?php
+                                }                       
+                            ?>
+                        </select>
+                    </div>
+                </div>
                 <p class="control">
                     <input type="submit" class="button is-primary" name="submit"  id="submit" value="Register">
                 </p>
+                <p>
+                  Already have an account? <a href="educator.php"> Sign in.</a>
             </form>
         </div>
     </div>
@@ -52,12 +72,13 @@
             $lastname = $_POST['lastname'];
             $phone_no = $_POST['phone'];
             $password = $_POST['password'];
+            $campus = $_POST['campus_id'];
             //$password = md5($password);
             $targets_id = 2;
             $targets_id = (int) $targets_id;
-            $sql = "INSERT INTO users (first_name, last_name, phone, targets_id, pass) VALUES (?,?,?,?,?)";
+            $sql = "INSERT INTO users (first_name, last_name, phone, targets_id, pass,campus_id) VALUES (?,?,?,?,?,?)";
             $stmt= $conn->prepare($sql);
-            $stmt->bind_param("sssds", $firstname, $lastname, $phone_no,$targets_id,$password);
+            $stmt->bind_param("sssdss", $firstname, $lastname, $phone_no,$targets_id,$password,$campus);
             $stmt->execute();
             if (!isset($stmt)) {
                 echo "Registration not successful";
