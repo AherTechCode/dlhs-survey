@@ -39,7 +39,7 @@
                     <div class="container">
                         <form method="post">
                             <div class="field">
-                                <label for="username" class="label">Username</label>
+                                <label for="username" class="label">Phone Number</label>
                                 <div class="control has-icons-left">
                                     <input class="input" id="username" name="username" type="text" placeholder="enter your phone number">
                                     <span class="icon is-small is-left">
@@ -78,6 +78,7 @@
             if(is_array($row)) {
                 $_SESSION["id"] = $row['id'];
                 $_SESSION["user"] = $row['first_name'];
+                $_SESSION["campus"] = $row['campus_id'];
             } else {
                 $message = "Invalid Phone number or Password!";
             }
