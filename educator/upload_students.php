@@ -50,36 +50,26 @@
                 <div class="columns is-centered">
                     <div class="column"></div>
                     <div class="column">
+                        <div class="has-background-info mb-3"><a style="color:white" href="../templates/student_template.csv">Download Template</a></div>
                     	<div class="field">
-			    <select class="input" name="class_id" id="class_id" >
-                                    <option disabled selected style="text-align:center">------Select Class------</option>
-                                    <?php 
+			                <select class="input" name="class_id" id="class_id" >
+                                <option disabled selected style="text-align:center">------Select Class------</option>
+                                    <?php
                                         require('../server/db_connect.php');
                                         $camp_list = "select * from classes";
                                         $camp_query = $conn->query($camp_list);
                                         while($row = $camp_query->fetch_assoc()) {
                                     ?>
-                                    <option value="<?php echo $row['id'] ?>"><?php echo $row['student_class'] ?></option>
-                                    <?php
-                                    }                       
-                                    ?>
-                                </select>
+                            <option value="<?php echo $row['id'] ?>"><?php echo $row['student_class'] ?></option>
+                             <?php
+                              }
+                             ?>
+                            </select>
                         </div>
-                        <div class="file  is-centered">
-                            <label class="file-label">
-                                <input class="file-input" type="file" name="file">
-                                <span class="file-cta">
-                                    <span class="file-icon">
-                                        <i class="fas fa-upload"></i>
-                                    </span>
-                                    <span class="file-label">
-                                        Choose an excel file…
-                                    </span>
-                                
-                                </span>
-                            </label>
-                        </div><br/><br/> 
-                        <div class="file is-grouped is-centered">
+                        <div class="file is-centered is-large">
+                            <input type="file" id="file" name="file" class="input is-large is-info" accept=".csv">
+                        </div><br/>
+                        <div class="field is-grouped is-centered">
                             <div class="submit is=large">
                                 <input class="button is-large is-success" Type="submit" name="submit_file" value="Upload" />
                             </div>&nbsp;&nbsp;&nbsp;
@@ -102,9 +92,12 @@
         $filename=$_FILES["file"]["tmp_name"];    
          if($_FILES["file"]["size"] > 0)
          {
+            $count = 0;
             $file = fopen($filename, "r");
               while (($getData = fgetcsv($file, 10000, ",")) !== FALSE)
                {
+                 $count++;
+                 if ($count == 1) { continue; }
                     $firstname = $getData[0];
                     $lastname = $getData[1];
                     $admissionNumber = $getData[2];
@@ -115,11 +108,11 @@
                     $campus_id = $_SESSION["campus"];
                     $sql = "INSERT into users (first_name,last_name,admission_num,classes_id,targets_id,pass,campus_id) VALUES (?,?,?,?,?,?,?)";
                     $stmt= $conn->prepare($sql);
-                    $stmt->bind_param("sssddsd", $firstname, $lastname, $admissionNumber,$classes_id,$targets_id,$password,$campus_id);
+                    $stmt->bind_param("sssddsd", $firstname, $lastname, $admissionNumber,$classes_id,$targets_id,md5($password),$campus_id);
                     $stmt->execute();
 
                 }
-                
+
                 if(!isset($stmt))
                     {
                         echo "<script type=\"text/javascript\">
@@ -129,6 +122,7 @@
                     else {
                         echo "<script>
                          alert(\"File has been successfully Imported.\");
+                         window.location.assign('educator.php');
                         </script>";
                     }
           

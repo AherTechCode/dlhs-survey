@@ -21,7 +21,7 @@
         </style>
     </head>
     <body class="has-navbar-fixed-top">
-    <nav class="navbar is-info xx-large is-fixed-top">
+    <nav class="navbar is-info xx-large">
         <div class="navbar-brand">
             <a class="navbar-item" href="index.php">
                 <h1 class="title xx-large" style="color:white;text-align:center; padding:15px;">STUDENTS SURVEY</h1>
@@ -36,8 +36,8 @@
         <div id="navbarExampleTransparentExample" class="navbar-menu">
             <div class="navbar-end">
                 <div class="navbar-item">
-                    <div class="field is-grouped">
-                        <p class="control">
+                    <div class="field is-grouped has-background-danger">
+                        <p class="control" >
                             <a class="button is-danger" href="logout.php">
                                 <span class="icon">
                                     <i class="fa fa-times"></i>
@@ -60,7 +60,7 @@
                     <div class="container">
                         <form method="post">
                             <div class="field">
-                                <label for="username" class="label">Admission Number</label>
+                                <label for="username" class="label">Username</label>
                                 <div class="control has-icons-left">
                                     <input class="input" id="username" name="username" type="text">
                                     <span class="icon is-small is-left">
@@ -140,7 +140,7 @@
         if (isset($_POST['login'])) {
             $username = $_POST['username'];
             $password = $_POST['password'];
-            $query = "SELECT * FROM users WHERE admission_num ='". $_POST["username"]."' and pass = '". $_POST["password"]."'";
+            $query = "SELECT * FROM users WHERE admission_num ='". $_POST["username"]."' and pass = '". md5($_POST["password"]) ."'";
             $result = $conn->query($query);
             $row = $result->fetch_assoc();
             if($row) {

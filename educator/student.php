@@ -32,11 +32,13 @@
                     <div class="navbar-item">
                         <div class="field is-grouped">
                             <p class="control">
-                                <a class="button is-success" href="upload_students.php">
+                                <a class="bd-tw-button button" href="educator.php">
                                     <span class="icon">
-                                        <i class="fas fa-upload"></i>
+                                        <i class="fas fa-arrow-left"></i>
                                     </span>
-                                    <span>UPLOAD</span>
+                                    <span>
+                                        BACK
+                                    </span>
                                 </a>
                             </p>
                         </div>
@@ -88,7 +90,7 @@
                      <p class="is-size-5"><?php echo "<b>Admission Number:</b> ".$profile->admission_num; ?></p><br/>
                     </div>
                     <div class="field">
-                        <a class="button" onclick="doFileUpload();">Update Students Details</a>
+                        <a class="button is-info" onclick="doFileUpload();">Update Students Details</a>
                     </div>
                 </div>
             </div>   
@@ -105,13 +107,13 @@
                         <div class="field">
                             <label for="first_name" class="label is-medium">Enter First Name </label> 
                             <div class="control">
-                                <input type="text" class="input" name="first_name" id="first_name" placeholder="<?php echo $profile->first_name; ?>">
+                                <input type="text" class="input" name="first_name" id="first_name" value="<?php echo $profile->first_name; ?>">
                             </div>
                         </div>
                         <div class="field">
                             <label for="last_name" class="label is-medium">Last Name</label>
                             <div class="control">
-                                <input type="text" class="input" name="last_name" id="last_name" placeholder="<?php echo $profile->last_name; ?>">
+                                <input type="text" class="input" name="last_name" id="last_name" value="<?php echo $profile->last_name; ?>">
                             </div>
                         </div>
                         <div class="field">
@@ -131,7 +133,7 @@
                         <div class="field">
                             <label for="admission_num" class="label is-medium">Admission Number</label>
                             <div class="control">
-                                <input type="text" class="input" name="admission_num" id="admission_num" placeholder="<?php echo $profile->admission_num; ?>">
+                                <input type="text" class="input" name="admission_num" id="admission_num" value="<?php echo $profile->admission_num; ?>">
                             </div>
                         </div>
                         <div class="file is-grouped is-centered">

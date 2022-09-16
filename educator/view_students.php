@@ -93,16 +93,7 @@
                         <td><a href="student.php?page=<?php echo $client->id; ?>"><?php echo $client->first_name; ?></a></td>
                         <td><a href="student.php?page=<?php echo $client->id; ?>"><?php echo $client->last_name; ?></a></td>
                         <td><a href="student.php?page=<?php echo $client->id; ?>"><?php echo $client->admission_num; ?></a></td>
-                        <td>
-                            <?php 
-                                if ($client->targets_id == 1){
-                                    echo "students";
-                                }
-                                else {
-                                    echo "Educators";
-                                }
-                            ?>
-                        </td>
+                    
                         <td>
                             <?php
                                 switch ($client->classes_id) {

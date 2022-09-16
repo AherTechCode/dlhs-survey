@@ -64,7 +64,7 @@
 
                     <h4 class="sub-title">Would you like to participate in this survey now???</h4>
                     <h5 class="sub-title"> Click
-                    <input type="submit" class="button is-medium is-info" value="start" name="submit1">
+                    <input type="submit" class="button is-info" value="start" name="submit1">
                         To begin
                     </h5>
                 </div>        
