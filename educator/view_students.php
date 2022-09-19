@@ -16,7 +16,8 @@
 <body>
     <?php
         require('../server/getQuestions.php');
-        $page = $_GET['page'] ?? 1;
+        if (!isset($_GET['page']))  $page = 1;
+        else $page = $_GET['page'];
         $perPage = 20;
         $targ = 1;
         $customers = getStudents($perPage, $page,$targ);
@@ -126,7 +127,7 @@
                 ?>
             </tbody>
         </table>
-        <span class="pl-3">Page <?php echo $_GET['page'] ?? 1; ?> of <?php echo ceil($total/20); ?></span>
+        <span class="pl-3">Page <?php echo $page; ?> of <?php echo ceil($total/20); ?></span>
     </div>
     <div class="field is-grouped" style="overflow-x: auto;">
         <?php
