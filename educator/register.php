@@ -75,7 +75,7 @@
 
     <?php 
         require('../server/db_connect.php');
-        require('../server/getQuestions.php');
+        //require('../server/getQuestions.php');
 
         if (isset($_POST['submit'])) {
             $firstname = $_POST['firstname'];

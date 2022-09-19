@@ -1,7 +1,7 @@
 <?php
 
 class log {
-    public function RaiseError(string $fmt, string $message) {
+    public function RaiseError($fmt, $message) {
         $fp = fopen('errors/errorlogs.txt', 'a+');
         $msg = $fmt.": - ".date("Ymdhsi")." -".$message;
         fwrite($fp, $msg, 4096);

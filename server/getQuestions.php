@@ -7,7 +7,7 @@
     $db = new DbHandlers();
     $dl = new renderer();
 
-    function getQuestions(int $NumRow = 20, int $page = 1) {
+    function getQuestions($NumRow = 20, $page = 1) {
         global $db, $dl;
         $offset = ($page - 1) * $NumRow;
         $count_query = "select count(*) from questions";
@@ -19,7 +19,7 @@
         return [$dl->render('json', $data, null), $count];
     }
 
-    function getStudents(int $NumRow = 20, int $page = 1, int $targ = 1) {
+    function getStudents($NumRow = 20, $page = 1, $targ = 1) {
         global $db, $dl;
         $offset = ($page - 1) * $NumRow;
         $count_query = "select count(*) from users";
@@ -31,14 +31,14 @@
         return [$dl->render('json', $data, null), $count];
     }
 
-    function getQuestion(int $client_id) {
+    function getQuestion($client_id) {
         global $db, $dl;
         $query = "select * from questions where id='$client_id'";
         $data = $db->getRowAssoc($query);
         return $dl->render('json', $data, null);
     }
 
-    function getStudent(int $client_id) {
+    function getStudent($client_id) {
         global $db, $dl;
         $query = "select * from users where id='$client_id'";
         $data = $db->getRowAssoc($query);
