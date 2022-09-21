@@ -17,41 +17,35 @@
                     <a class="navbar-item" href="index.php">
                         <h1 style="font-size: xx-large;">EDUCATOR</h1>
                     </a>
-                    <div class="navbar-burger" data-target="navbarExampleTransparentExample">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
+            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
                 </div>
 
-                <div id="navbarExampleTransparentExample" class="navbar-menu">
+                <div id="navMenu" class="navbar-menu">
                     <div class="navbar-end">
                         <div class="navbar-item">
-                            <div class="field is-grouped">
-                                <p class="control">
+                            <div class="buttons">
                                     <a class="button is-success" href="upload_students.php">
                                         <span class="icon">
                                             <i class="fas fa-upload"></i>
                                         </span>
                                         <span>UPLOAD STUDENTS</span>
                                     </a>
-                                </p>
-                                <p class="control">
                                     <a class="button is-success" href="view_students.php">
                                         <span class="icon">
                                             <i class="fas fa-search"></i>
                                         </span>
                                         <span>VIEW STUDENTS</span>
                                     </a>
-                                </p>
-                                <p class="control">
                                     <a class="button is-danger" href="logout.php">
                                         <span class="icon">
                                             <i class="fa fa-times"></i>
                                         </span>
                                         <span>LOG OUT</span>
                                     </a>
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -145,3 +139,27 @@
         ?>
     </body>
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+// Get all "navbar-burger" elements
+const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+// Add a click event on each of them
+$navbarBurgers.forEach( el => {
+  el.addEventListener('click', () => {
+
+    // Get the target from the "data-target" attribute
+    const target = el.dataset.target;
+    const $target = document.getElementById(target);
+
+    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    el.classList.toggle('is-active');
+    $target.classList.toggle('is-active');
+
+  });
+});
+
+});
+</script>
+

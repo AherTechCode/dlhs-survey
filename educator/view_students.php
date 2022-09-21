@@ -18,9 +18,10 @@
         require('../server/getQuestions.php');
         if (!isset($_GET['page']))  $page = 1;
         else $page = $_GET['page'];
+        $campus_id = $_SESSION["campus"];
         $perPage = 20;
         $targ = 1;
-        $customers = getStudents($perPage, $page,$targ);
+        $customers = getStudents($perPage, $page,$targ,$campus_id);
         $clients = json_decode($customers[0]);
         $total = (int)$customers[1];
     ?>
@@ -39,9 +40,8 @@
         <div id="navbarExampleTransparentExample" class="navbar-menu">
             <div class="navbar-end">
                 <div class="navbar-item">
-                    <div class="field is-grouped">
-                        <p class="control">
-                            <a class="bd-tw-button button" href="educator.php">
+                    <div class="buttons">
+                            <a class="button" href="educator.php">
                                 <span class="icon">
                                     <i class="fas fa-arrow-left"></i>
                                 </span>
@@ -49,15 +49,12 @@
                                     BACK
                                 </span>
                             </a>
-                        </p>
-                        <p class="control">
                             <a class="button is-success" href="upload_students.php">
                                 <span class="icon">
                                     <i class="fas fa-upload"></i>
                                 </span>
                                 <span>UPLOAD</span>
                             </a>
-                        </p>
                     </div>
                 </div>
             </div>
@@ -76,7 +73,6 @@
         <table id="myTable" name="myTable" class="table is-striped is-hoverable is-fullwidth">
             <thead>
                 <tr>
-                    <th>Students ID</th>
                     <th>Students First Name</th>
                     <th>Students Last Name</th>
                     <th>Admission Number</th>
@@ -90,7 +86,7 @@
                     $index++;
                     ?>
                     <tr>
-                        <td style="text-align: centre;"><?php echo $client->id; ?></td>
+                        <!-- <td style="text-align: centre;"><?php echo $client->id; ?></td> -->
                         <td><a href="student.php?page=<?php echo $client->id; ?>"><?php echo $client->first_name; ?></a></td>
                         <td><a href="student.php?page=<?php echo $client->id; ?>"><?php echo $client->last_name; ?></a></td>
                         <td><a href="student.php?page=<?php echo $client->id; ?>"><?php echo $client->admission_num; ?></a></td>
@@ -165,3 +161,27 @@
     </script>
 </body>
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+// Get all "navbar-burger" elements
+const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+// Add a click event on each of them
+$navbarBurgers.forEach( el => {
+  el.addEventListener('click', () => {
+
+    // Get the target from the "data-target" attribute
+    const target = el.dataset.target;
+    const $target = document.getElementById(target);
+
+    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    el.classList.toggle('is-active');
+    $target.classList.toggle('is-active');
+
+  });
+});
+
+});
+</script>
+

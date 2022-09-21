@@ -1,3 +1,3 @@
 <?php 
-    $conn= new mysqli('localhost','abayomi','aherceo2','survey') or die("Could not connect to mysql".mysqli_error($con));
+    $conn= new mysqli('localhost','root','ahertl2022','survey') or die("Could not connect to mysql".mysqli_error($con));
 ?>

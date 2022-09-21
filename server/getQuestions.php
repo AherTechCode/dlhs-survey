@@ -19,11 +19,11 @@
         return [$dl->render('json', $data, null), $count];
     }
 
-    function getStudents($NumRow = 20, $page = 1, $targ = 1) {
+    function getStudents($NumRow = 20, $page = 1, $targ = 1, $campus_id) {
         global $db, $dl;
         $offset = ($page - 1) * $NumRow;
-        $count_query = "select count(*) from users";
-        $query = "select * from users where targets_id = '$targ' limit $NumRow offset $offset ";
+        $count_query = "select count(*) from users where campus_id='$campus_id'";
+        $query = "select * from users where targets_id = '$targ' AND campus_id='$campus_id' limit $NumRow offset $offset ";
         
         $data = $db->getRowAssoc($query);
         $count = $db->getRows($count_query)[0][0];

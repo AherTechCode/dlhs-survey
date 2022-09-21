@@ -30,7 +30,6 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="field is-grouped">
-                            <p class="control">
                                 <a class="bd-tw-button button" href="educator.php">
                                     <span class="icon">
                                         <i class="fas fa-arrow-left"></i>
@@ -39,7 +38,6 @@
                                         BACK
                                     </span>
                                 </a>
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -49,6 +47,7 @@
             <form method="POST" enctype="multipart/form-data">
                 <div class="columns is-centered">
                     <div class="column"></div>
+                    <?php  echo $error; ?>
                     <div class="column">
                         <div class="has-background-info mb-3"><a style="color:white" href="../templates/student_template.csv">Download Template</a></div>
                     	<div class="field">
@@ -106,11 +105,11 @@
                     $targets_id = (int) $targets_id;
                     $password = '12345'; 
                     $campus_id = $_SESSION["campus"];
+                
                     $sql = "INSERT into users (first_name,last_name,admission_num,classes_id,targets_id,pass,campus_id) VALUES (?,?,?,?,?,?,?)";
                     $stmt= $conn->prepare($sql);
                     $stmt->bind_param("sssddsd", $firstname, $lastname, $admissionNumber,$classes_id,$targets_id,md5($password),$campus_id);
                     $stmt->execute();
-
                 }
 
                 if(!isset($stmt))
@@ -122,11 +121,35 @@
                     else {
                         echo "<script>
                          alert(\"File has been successfully Imported.\");
-                         window.location.assign('educator.php');
+                         window.location.assign('upload_students.php');
                         </script>";
                     }
+                }
           
             fclose($file);  
-         }
-      }   
+         }  
 ?>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+// Get all "navbar-burger" elements
+const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+// Add a click event on each of them
+$navbarBurgers.forEach( el => {
+  el.addEventListener('click', () => {
+
+    // Get the target from the "data-target" attribute
+    const target = el.dataset.target;
+    const $target = document.getElementById(target);
+
+    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    el.classList.toggle('is-active');
+    $target.classList.toggle('is-active');
+
+  });
+});
+
+});
+</script>

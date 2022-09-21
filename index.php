@@ -20,40 +20,54 @@
             
         </style>
     </head>
-    <body class="has-navbar-fixed-top">
-    <nav class="navbar is-info xx-large">
+    <body>
+        <?php if (isset($_SESSION["user"])) { ?>
+    <nav class="navbar is-info">
         <div class="navbar-brand">
-            <a class="navbar-item" href="index.php">
+            <div class="navbar-item">
+            <a href="index.php">
                 <h1 class="title xx-large" style="color:white;text-align:center; padding:15px;">STUDENTS SURVEY</h1>
             </a>
-            <div class="navbar-burger" data-target="navbarExampleTransparentExample">
+            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
+            </a>
             </div>
         </div>
-        <?php if (isset($_SESSION["user"])) { ?>
-        <div id="navbarExampleTransparentExample" class="navbar-menu">
+        <div id="navMenu" class="navbar-menu">
             <div class="navbar-end">
                 <div class="navbar-item">
-                    <div class="field is-grouped has-background-danger">
-                        <p class="control" >
+                    <div class="buttons">
                             <a class="button is-danger" href="logout.php">
                                 <span class="icon">
                                     <i class="fa fa-times"></i>
                                 </span>
                                 <span>LOG OUT</span>
                             </a>
-                        </p>
                     </div>
                 </div>
             </div>
         </div>
-        <?php } ?>
     </nav>
+        <?php } ?>
     <?php 
         if (!isset($_SESSION['user'])) {
             ?>
+    <nav class="navbar is-info xx-large">
+        <div class="navbar-brand">
+            <div class="navbar-item">
+            <a href="index.php">
+                <h1 class="title xx-large" style="color:white;text-align:center; padding:15px;">STUDENTS SURVEY</h1>
+            </a>
+            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+            </div>
+        </div>
+    </nav>
             <div class="columns is-vcentered is-centered" style="height: 100vh; ">
                 
                 <div class="column is-one-fifth">
@@ -188,5 +202,28 @@
     ?>
     </body>
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+// Get all "navbar-burger" elements
+const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+// Add a click event on each of them
+$navbarBurgers.forEach( el => {
+  el.addEventListener('click', () => {
+
+    // Get the target from the "data-target" attribute
+    const target = el.dataset.target;
+    const $target = document.getElementById(target);
+
+    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    el.classList.toggle('is-active');
+    $target.classList.toggle('is-active');
+
+  });
+});
+
+});
+</script>
 
 

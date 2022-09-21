@@ -32,7 +32,7 @@ class DbHandlers
     {
         
         try {
-            $this->conn = new PDO("mysql:host=localhost;dbname=survey", "abayomi", "aherceo2");
+            $this->conn = new PDO("mysql:host=localhost;dbname=survey", "root", "ahertl2022");
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             $this->errLine = $e->getLine();
