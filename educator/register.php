@@ -98,15 +98,17 @@
                 $stmt->execute();
                 if (!isset($stmt)) {
                     echo "Registration not successful";
-                    header("Location:registration.php");
-                }
-                else {
                     echo "
                         <script>
-                            window.alert('registration successful');
-                            window.location.assign('index.php');
+                            setTimeout(() => { window.location.href='register.php'; }, 500);
                         </script>
                     ";
+                }
+                else {
+                    echo "<script>
+                            window.alert('registration successful');
+                            window.location.assign('index.php');
+                        </script>";
                 }
             }
         }
